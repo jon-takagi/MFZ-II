@@ -1,0 +1,41 @@
+.water {
+    background-color: #0099ff;
+
+}
+
+.sand {
+    background-color: #ffcc00;
+
+}
+
+.grass {
+    background-color: #00ff00;
+
+}
+
+.forest {
+    background-color: #008000;
+
+}
+
+.mountain {
+    background-color: #666666;
+
+}
+.deep-water {
+    background-color: #000099;
+    
+}
+
+td {
+    width: 10px;
+    height: 10px;
+    max-width: 10px;
+    min-width: 10px;
+    min-height: 10px;
+    max-height: 10px;
+}
+
+table {
+    border-collapse: collapse
+}
