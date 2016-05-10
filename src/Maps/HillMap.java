@@ -1,3 +1,5 @@
+package Maps;
+
 /**
  * Created by 40095 on 5/4/16.
  */
@@ -9,15 +11,18 @@ public class HillMap extends HeightMap {
     public HillMap(int l, int w) {
         super(l, w);
         double landVolume = length * width / 2.4;
+        System.out.print("Generating Terrain.");
         for (int iterations = 0; iterations < landVolume; iterations++) {
-            System.out.println((int) ((iterations * 100) / (landVolume)) + "% complete");
-//            centerx = rinr(0, length);
-//            centery = rinr(0, width);
+            if(iterations * 100 / landVolume % 5 == 0)
+                System.out.print(".");
+//            System.out.println((int) ((iterations * 100) / (landVolume)) + "% complete");
 //
             theta = Math.random() * 360;
             distance = rinr(0, l / 2);
             centerx = (int) (l / 2 + Math.cos(theta) * distance);
             centery = (int) (l / 2 + Math.sin(theta) * distance);
+//            centerx = rinr(0, length);
+//            centery = rinr(0, width);
             r = rinr(0, 6);
 
 
