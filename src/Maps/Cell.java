@@ -2,12 +2,10 @@ package Maps; /**
  * Created by 40095 on 5/3/16.
  */
 
-import java.awt.*;
+import Frames.TeamObject;
+import javafx.scene.paint.Paint;
 
 public class Cell {
-
-    static String[] buckets = {"#000000", "#080808", "#101010", "#181818", "#202020", "#282828", "#303030", "#383838", "#404040", "#484848", "#505050", "#585858", "#606060", "#686868", "#707070", "#787878", "#808080", "#888888", "#909090", "#989898", "#A0A0A0", "#A8A8A8", "#B0B0B0", "#B8B8B8", "#C0C0C0", "#C8C8C8", "#D0D0D0", "#D8D8D8", "#E0E0E0", "#E8E8E8", "#F0F0F0", "#F8F8F8", "#FFFFFF"};
-
     Cell north;
     Cell south;
     Cell east;
@@ -21,11 +19,18 @@ public class Cell {
     double height;
     Terrain terrain;
 
+    Content contents = new Content();
+
+
     public Cell() {
     }
 
     public void calculateTerrain() {
         terrain = new Terrain(height);
+        if (terrain.getTerrainType().equals("forest"))
+            contents = new Cover(4);
+        if (terrain.getTerrainType().equals("mountain"))
+            contents = new Cover(6);
     }
 
     public void checkIfBeach() {
@@ -64,21 +69,14 @@ public class Cell {
         this.height = height;
     }
 
-    public String getHexHeight() {
-        int bucketNum = (int) Math.min(255, height) / 8;
-        if (bucketNum < 0)
-            return buckets[0];
-        return buckets[bucketNum];
-    }
-
-    public Color getHeightColor() {
-        int h = (int) height;
-        if (h > 255)
-            h = 255;
-        if (h < 0)
-            h = 0;
-        return new Color(h, h, h);
-    }
+//    public Color getHeightColor() {
+//        int h = (int) height;
+//        if (h > 255)
+//            h = 255;
+//        if (h < 0)
+//            h = 0;
+//        return new Color(h, h, h);
+//    }
 
     public Cell[] getNeighbors() {
         return new Cell[]{east, ne, north, nw, west, sw, south, se};
@@ -98,5 +96,22 @@ public class Cell {
 
     public Cell[] nsew() {
         return new Cell[]{north, south, east, west};
+    }
+
+    public Paint getColor() {
+        if (contents.getContentType() != null) {
+            if (contents.getContentType().equals("frame") || (contents.getContentType().equals("station"))) {
+                return ((TeamObject) contents).getTeamColor();
+            }
+        }
+        return getTerrain().getBackgroundColor();
+    }
+
+    public Content getContents() {
+        return contents;
+    }
+
+    public void setContents(Content contents) {
+        this.contents = contents;
     }
 }
