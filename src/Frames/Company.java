@@ -1,6 +1,8 @@
 package Frames;
 
 
+import Content.Frame;
+import Content.Station;
 import javafx.scene.paint.Color;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

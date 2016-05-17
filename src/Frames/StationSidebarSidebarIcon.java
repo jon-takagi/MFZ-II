@@ -1,15 +1,16 @@
 package Frames;
 
+import Content.Station;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 /**
  * Created by 40095 on 5/12/16.
  */
-public class StationIcon extends TeamObjectIcon {
+public class StationSidebarSidebarIcon extends TeamObjectSidebarIcon {
     Station station;
 
-    public StationIcon(Station station) {
+    public StationSidebarSidebarIcon(Station station) {
         this.station = station;
         Circle r = new Circle(7.5);
 //        r.setFill(station.getTeamColor());

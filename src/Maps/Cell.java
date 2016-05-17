@@ -2,8 +2,9 @@ package Maps; /**
  * Created by 40095 on 5/3/16.
  */
 
-import Frames.TeamObject;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import Content.*;
 
 public class Cell {
     Cell north;
@@ -19,7 +20,7 @@ public class Cell {
     double height;
     Terrain terrain;
 
-    Content contents = new Content();
+    Content contents = new EmptyContent();
 
 
     public Cell() {
@@ -69,14 +70,12 @@ public class Cell {
         this.height = height;
     }
 
-//    public Color getHeightColor() {
-//        int h = (int) height;
-//        if (h > 255)
-//            h = 255;
-//        if (h < 0)
-//            h = 0;
-//        return new Color(h, h, h);
-//    }
+    public Color getHeightColor() {
+        int h = (int) height;
+        h = Math.min(255, h);
+        h = Math.max(0, h);
+        return Color.rgb(h, h, h);
+    }
 
     public Cell[] getNeighbors() {
         return new Cell[]{east, ne, north, nw, west, sw, south, se};

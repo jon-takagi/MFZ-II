@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Systems {
     ArrayList<MFZ_System> systems;
     
-    Systems(String s1, String s2, String s3, String s4) {
+    public Systems(String s1, String s2, String s3, String s4) {
         systems = new ArrayList<>();
         systems.add(new MFZ_System(s1));
         systems.add(new MFZ_System(s2));

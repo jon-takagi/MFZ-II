@@ -11,10 +11,13 @@ public class HillMap extends HeightMap {
     public HillMap(int l, int w) {
         super(l, w);
         double landVolume = length * width / 2.4;
-        System.out.print("Generating Terrain.");
+        System.out.print("Generating Terrain");
         for (int iterations = 0; iterations < landVolume; iterations++) {
-            if(iterations * 100 / landVolume % 5 == 0)
+            if (gcd(iterations, (int) (landVolume / 10)) == iterations)
                 System.out.print(".");
+//            System.out.println(percentDone);
+//            if(percentDone % 10 == 0)
+//                System.out.print(".");
 //            System.out.println((int) ((iterations * 100) / (landVolume)) + "% complete");
 //
             theta = Math.random() * 360;
@@ -32,7 +35,7 @@ public class HillMap extends HeightMap {
                     if (h >= 0) {
                         if (distance < 7) {
                             getCells()[i][j].setHeight(h * distance / 12 + getCells()[i][j].getHeight());
-                        }   else {
+                        } else {
                             getCells()[i][j].setHeight(h + getCells()[i][j].getHeight());
                         }
                     }
@@ -40,6 +43,7 @@ public class HillMap extends HeightMap {
                 }
             }
         }
+        System.out.println("done");
         double max = Double.MIN_VALUE;
         double min = Double.MAX_VALUE;
         for (int i = 0; i < length; i++) {
@@ -58,6 +62,12 @@ public class HillMap extends HeightMap {
                 getCells()[i][j].setHeight(z * 255);
             }
         }
+    }
+
+    private int gcd(int a, int b) {
+        if (b == 0)
+            return a;
+        return gcd(b, a % b);
     }
 
     int square(int x) {

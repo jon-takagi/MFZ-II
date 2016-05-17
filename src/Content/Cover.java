@@ -1,4 +1,6 @@
-package Maps;
+package Content;
+
+import Display.CoverIcon;
 
 /**
  * Created by 40095 on 5/11/16.
@@ -23,6 +25,9 @@ public class Cover extends Content {
 
     }
     
+    public CoverIcon getIcon() {
+        return new CoverIcon(this);
+    }
     
     
 }

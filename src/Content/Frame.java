@@ -1,5 +1,7 @@
-package Frames;
+package Content;
 
+import Display.FrameIcon;
+import Frames.Systems;
 import javafx.scene.paint.Color;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,7 +16,7 @@ public class Frame extends TeamObject {
     private int defenseScore;
     private String name;
 
-    Frame(JSONObject data, Color color) {
+    public Frame(JSONObject data, Color color) {
         contentType = "frame";
         whiteDice = 2;
         active = true;
@@ -53,6 +55,9 @@ public class Frame extends TeamObject {
         JSONArray systemsAsJSONArray = systems.asJSONArray();
         obj.put("systemIcons", systemsAsJSONArray);
         return obj;
-
+    }
+    
+    public FrameIcon getIcon() {
+        return new FrameIcon(this);
     }
 }

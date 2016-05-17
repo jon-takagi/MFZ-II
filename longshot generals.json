@@ -1,0 +1,22 @@
+{
+  "name": "Longshot Generals",
+  "color": "#800000",
+  "frames": [
+    {
+      "name": "Anvil",
+      "systems":["DEF", "DEF", "DIR", "COM"]
+    },
+    {
+      "name": "Hammer",
+      "systems":["DEF", "DIR", "DIR", "COM"]
+    },
+    {
+      "name": "Cannon",
+      "systems": ["ART", "DEF", "COM", "COM"]
+    },
+    {
+      "name": "Sword & Board",
+      "systems": ["MLE", "DEF", "DEF", "COM"]
+    }
+  ]
+}

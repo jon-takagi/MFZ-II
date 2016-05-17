@@ -1,7 +1,8 @@
-/**
+package Display; /**
  * Created by 40095 on 5/8/16.
  */
 
+import Content.TeamObject;
 import Frames.*;
 import Maps.Cell;
 import Maps.HeightMap;
@@ -30,8 +31,9 @@ public class Client extends Application {
     private Scene scene;
     private VBox companyDisplayPanel;
     private VBox fileChoosingPanel;
+
     Company c = null;
-    private final int length = 64, width = 64, scalingFactor = 8;
+    public static final int length = 64, width = 64, scalingFactor = 8;
     private HeightMap table;
     Tile[][] tiles;
     static TeamObject toBePlaced;
@@ -45,8 +47,6 @@ public class Client extends Application {
         stage.setTitle("MFZ Online");  //text for the title bar of the window
 
         TilePane tp = new TilePane();
-
-
         tp.setHgap(0);
         tp.setVgap(0);
         tp.setMaxWidth(width * scalingFactor);
@@ -55,6 +55,8 @@ public class Client extends Application {
         tp.setMinHeight(length * scalingFactor);
 
         table = new HillMap(length, width);
+//        table = new DiamondSquareMap(length, width);
+//        table = new RandomNoiseMap(length, width);
         table.mapTerrain();
 
         configureRightPanel();
@@ -62,6 +64,7 @@ public class Client extends Application {
         for (int i = 0; i < length; i++) {
             for (int j = 0; j < width; j++) {
                 tiles[i][j] = new Tile(scalingFactor, table.getCells()[i][j], i, j);
+//                System.out.println(tiles[i][j] == null);
                 tp.getChildren().add(tiles[i][j]);
             }
         }
@@ -88,16 +91,16 @@ public class Client extends Application {
         companyDisplayPanel.getChildren().addAll(name);
         companyDisplayPanel.setSpacing(19);
         for (int i = 0; i < c.getFrames().size(); i++) {
-            FrameIcon fi = new FrameIcon(c.getFrames().get(i));
+            FrameSidebarSidebarIcon fi = new FrameSidebarSidebarIcon(c.getFrames().get(i));
             fi.setOnMouseClicked(event -> {
-                toBePlaced = (TeamObject) ((TeamObjectIcon) event.getSource()).getData();;
+                toBePlaced = (TeamObject) ((TeamObjectSidebarIcon) event.getSource()).getData();
             });
             companyDisplayPanel.getChildren().add(fi);
         }
         for (int i = 0; i < Company.STARTING_STATIONS; i++) {
-            StationIcon si = new StationIcon(c.getStations().get(i));
+            StationSidebarSidebarIcon si = new StationSidebarSidebarIcon(c.getStations().get(i));
             si.setOnMouseClicked(event -> {
-                toBePlaced = (TeamObject) ((TeamObjectIcon) event.getSource()).getData();
+                toBePlaced = (TeamObject) ((TeamObjectSidebarIcon) event.getSource()).getData();
             });
             companyDisplayPanel.getChildren().add(si);
         }
@@ -107,7 +110,6 @@ public class Client extends Application {
         FileChooser fc = new FileChooser();
         fc.setTitle("Open");
         return fc.showOpenDialog(stage);
-
     }
 
     public void openFile(File f) {
@@ -121,6 +123,7 @@ public class Client extends Application {
             try {
                 JSONObject obj = (JSONObject) parser.parse(content);
                 c = Company.companyFromJSON(obj);
+                c.setTurn(true);
                 placeFrames();
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -140,13 +143,12 @@ public class Client extends Application {
                         System.out.print("x: " + t.xCoord + ", y: " + t.yCoord);
                         if (toBePlaced != null && !toBePlaced.isPlaced()) {
                             for (int k = 1; k < companyDisplayPanel.getChildren().size(); k++) {
-                                TeamObjectIcon fi = (TeamObjectIcon) companyDisplayPanel.getChildren().get(k);
+                                TeamObjectSidebarIcon fi = (TeamObjectSidebarIcon) companyDisplayPanel.getChildren().get(k);
                                 if (fi.getData().equals(toBePlaced)) {
                                     companyDisplayPanel.getChildren().remove(k);
                                 }
                             }
-                            cells[t.xCoord][t.yCoord].setContents(toBePlaced);
-                            t.setFill(cells[t.xCoord][t.yCoord].getColor());
+                            t.setContents(toBePlaced);
                             toBePlaced.setPlaced(true);
                         }
                     }

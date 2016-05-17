@@ -1,5 +1,6 @@
 package Frames;
 
+import Content.Frame;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -8,11 +9,11 @@ import javafx.scene.text.Text;
 /**
  * Created by 40095 on 5/11/16.
  */
-public class FrameIcon extends TeamObjectIcon {
+public class FrameSidebarSidebarIcon extends TeamObjectSidebarIcon {
     Rectangle[] systemIcons;
     Frame frame;
 
-    public FrameIcon(Frame frame) {
+    public FrameSidebarSidebarIcon(Frame frame) {
         super();
         this.frame = frame;
         HBox top = new HBox();
